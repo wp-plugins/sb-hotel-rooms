@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: SB Rooms
-Plugin URI: http://plugins.sitebridge.net/
+Plugin Name: SB Hotel - Rooms
+Plugin URI: http://www.sitebridge.net/
 Description: Sitebridge product of wordpress plugin (part of SB Hotel package)
 Version: 0.1
 Author: Sitebridge Development Team
@@ -117,7 +117,7 @@ class sb_hotel_rooms {
 			'public' => true,
 			'has_archive' => true,
 			'menu_position'=> 57,
-			'menu_icon' => plugins_url( 'images', __FILE__ ).'/hotel_icon.png',
+			'menu_icon' => plugins_url( 'images', __FILE__ ).'/room_icon.png',
 			'supports' => array( 'title', 'editor', 'page-attributes', 'thumbnail' ),
 		);
 
