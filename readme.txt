@@ -4,7 +4,7 @@ Donate link: http://www.sitebridge.net/donate/
 Tags: hotel, room
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 
+Stable tag: 0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ It will only use your standard wordpress tables to store the rooms data.
 == Frequently asked questions ==
 
 1. Can I group or categorize my rooms?
-Yes you can, go to setting > rooms options and check the "With Room Types & Facilities"
+Yes you can, go to settings > rooms options and check the "With Room Types & Facilities"
 
 == Screenshots ==
 
