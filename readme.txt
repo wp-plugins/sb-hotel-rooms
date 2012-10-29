@@ -1,6 +1,6 @@
 === SB Hotel Rooms ===
 Contributors: mrumengan
-Donate link: 
+Donate link: http://www.sitebridge.net/donate/
 Tags: hotel, room
 Requires at least: 3.3
 Tested up to: 3.4
