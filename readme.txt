@@ -32,11 +32,15 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 2. http://sitebridge.net/wp-content/uploads/2012/10/screenshot2.png
 
 == Changelog ==
+0.1.1
+- Added room detail on Room view
 
+0.1
 - First release, but usable
 - Lot of features will be added weekly
 
 == Upgrade notice ==
+
 
 
 
