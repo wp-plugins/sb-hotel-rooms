@@ -68,6 +68,7 @@ class sb_hotel_rooms {
 		add_action( 'admin_menu', array( &$this, 'register_sub_menu' ) );
 
 		add_filter( 'manage_rooms_posts_columns', array( &$this, 'change_room_columns' ) );
+		add_filter( 'the_content', array( &$this, 'rooms_filter_content' ) );
 
 		add_action('wp_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
 
@@ -249,6 +250,23 @@ class sb_hotel_rooms {
 
 	    </div>
 <?php
+	}
+
+	/*
+	 * Filters
+	 *
+	 */
+
+	function rooms_filter_content( $content ) {
+		if( $GLOBALS['post']->post_type == 'rooms' ) {
+			$metas = get_post_meta( $GLOBALS['post']->ID, '_room_details', true );
+			$price		= '<div class="room-price"><label class="title">'.__( 'Price: ', 'rooms' ).'</label><span class="content">'.$metas['Price'].'</span></div>';
+			$amenities	= '<div class="room-ammenities"><label class="title">'.__( 'Amenities: ', 'rooms' ).'</label><span class="content">'.$metas['Amenities'].'</span></div>';
+			return $content.$price.$amenities;
+		}
+
+		// otherwise returns the database content
+		return $content;
 	}
 }
 
