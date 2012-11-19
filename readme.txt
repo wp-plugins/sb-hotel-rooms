@@ -32,7 +32,7 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 
 == Changelog ==
 0.2.1
-- Added room pictures managament
+- Added room pictures management
 - Pictures showed in frontend as plain html, no css / style attached
 
 0.1.1
