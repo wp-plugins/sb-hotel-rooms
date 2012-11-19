@@ -129,18 +129,27 @@ class sb_hotel_rooms {
 	 * meta box content for room
 	 */
 	function add_metaboxes_standard() {
-		add_meta_box('room-details-standard', __('Room Details', 'sb_hotel_rooms'), array( &$this, 'room_metabox_standard'), 'rooms', 'side', 'default');
+		add_meta_box( 'room-details', __('Room Details', 'sb_hotel_rooms'), array( &$this, 'room_details'), 'rooms', 'side', 'default');
+		add_meta_box( 'room-details-picture', __('Pictures', 'mall'), array( &$this, 'room_pictures' ), 'rooms', 'normal', 'default' );
 
 	}
-	function room_metabox_standard( $post ) {
-		$metas = get_post_meta($post->ID, '_room_details', true);
-
+	function room_details( $post ) {
 		wp_nonce_field( plugin_basename( __FILE__ ), 'room-details' );
+		$metas = get_post_meta( $post->ID, '_room_details', true );
 
 		echo '<p><label for="room-price">'.__("Price", 'sb_hotel_rooms' ).'</label><br />
 			<input type="text" id="room-price" name="Room[Price]" class="number" value="'.$metas['Price'].'" size="15" /></p>';
 		echo '<p><label for="room-amenities">'.__('Amenities', 'sb_hotel_rooms' ).'</label><br />
 			<textarea id="room-amenities" name="Room[Amenities]" rows="5">'.$metas['Amenities'].'</textarea></p>';
+	}
+	/*
+	 * pictures metabox
+	 */
+	public function room_pictures( $post ) {
+		$metas = get_post_meta( $post->ID, 'sb_room_pictures' );
+
+		require_once( plugin_dir_path( __FILE__ ).'forms/room_pictures.php' );
+
 	}
 
 	/*
@@ -179,6 +188,9 @@ class sb_hotel_rooms {
 		if($_POST['Room']) {
 			$metadata = $_POST['Room'];
 			update_post_meta($post_id, '_room_details', $metadata);
+		}
+		if( $_POST['rooms']['pictures'] ) {
+			update_post_meta( $post_id, 'sb_room_pictures' , $_POST['rooms']['pictures'] );
 		}
 	}
 
@@ -238,9 +250,13 @@ class sb_hotel_rooms {
 
 		<table class="form-table">
 		<tbody>
-		<tr valign="top">
-			<th scope="row"><label for="blogname"><?php _e( 'With Room Types & Facilities', 'sb_hotel_rooms' ); ?></label></th>
+		<tr valign="top" class="odd">
+			<th scope="row"><label for="sb_hotel_options_rooms_taxonomies"><?php _e( 'With Room Types & Facilities', 'sb_hotel_rooms' ); ?></label></th>
 			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][taxonomies]" value="taxonomies" <?php echo ( $options['taxonomies'] ? 'checked' : '' ); ?> ></td>
+		</tr>
+		<tr valign="top" class="even">
+			<th scope="row"><label for="blogname"><?php _e( 'Use jQuery Lightbox for Room\'s Pictures', 'sb_hotel_rooms' ); ?></label></th>
+			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][jqlightbox]" value="jqlightbox" <?php echo ( $options['jqlightbox'] ? 'checked' : '' ); ?> ></td>
 		</tr>
 		</tbody>
 		</table>
@@ -249,7 +265,7 @@ class sb_hotel_rooms {
 	    </form>
 
 	    </div>
-<?php
+		<?php
 	}
 
 	/*
