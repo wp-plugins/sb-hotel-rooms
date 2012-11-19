@@ -30,10 +30,9 @@ jQuery(document).ready(function($) {
 		$('#room-pictures').val( metaValue );
 		var jsonValue = $.parseJSON( metaValue );
 		$.each( jsonValue, function( i, item ) {
-			console.log( item );
 			imgSrc = '<img class="room-pictures" src="' + item.url + '" hspace="2" />';
 			imgDiv  = '<div class="room-pictures-container"><span class="close"><a>[x]</a></span><br />';
-			imgDiv += imgSrc;
+			imgDiv += imgSrc+'<br />';
 			imgDiv += '<span class="caption">'+item.title+'</span></div>';
 			roomPictures.push({ 'url': item.url, 'title': item.title, 'ID': item.ID })
 			$('#holder-image').append( imgDiv );
@@ -62,7 +61,7 @@ jQuery(document).ready(function($) {
 	    imgTitle = jQuery('img',html).attr('title');
 	    imgSrc = '<img class="room-pictures" src="' + imgUrl + '" hspace="2" />';
 	    imgDiv  = '<div class="room-pictures-container"><span class="close"><a>[x]</a></span><br />';
-	    imgDiv += imgSrc;
+	    imgDiv += imgSrc+'<br />';
 	    imgDiv += '<span class="caption">'+imgTitle+'</span></div>';
 	    roomPictures.push({ 'url': imgUrl, 'title': imgTitle, 'ID': imgID });
 		$('#room-pictures').val( JSON.stringify( roomPictures ) );

@@ -31,6 +31,10 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 2. http://sitebridge.net/wp-content/uploads/2012/10/screenshot2.png
 
 == Changelog ==
+0.2.1
+- Added room pictures managament
+- Pictures showed in frontend as plain html, no css / style attached
+
 0.1.1
 - Added room detail on Room view
 

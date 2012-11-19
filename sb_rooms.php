@@ -256,7 +256,7 @@ class sb_hotel_rooms {
 		</tr>
 		<tr valign="top" class="even">
 			<th scope="row"><label for="blogname"><?php _e( 'Use jQuery Lightbox for Room\'s Pictures', 'sb_hotel_rooms' ); ?></label></th>
-			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][jqlightbox]" value="jqlightbox" <?php echo ( $options['jqlightbox'] ? 'checked' : '' ); ?> ></td>
+			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][jqlightbox]" value="jqlightbox" <?php echo ( $options['jqlightbox'] ? 'checked' : '' ); ?> disabled ></td>
 		</tr>
 		</tbody>
 		</table>
@@ -278,7 +278,16 @@ class sb_hotel_rooms {
 			$metas = get_post_meta( $GLOBALS['post']->ID, '_room_details', true );
 			$price		= '<div class="room-price"><label class="title">'.__( 'Price: ', 'rooms' ).'</label><span class="content">'.$metas['Price'].'</span></div>';
 			$amenities	= '<div class="room-ammenities"><label class="title">'.__( 'Amenities: ', 'rooms' ).'</label><span class="content">'.$metas['Amenities'].'</span></div>';
-			return $content.$price.$amenities;
+
+			$pictures = '<div class="room-picture-container">';
+			$metas = json_decode( get_post_meta( $GLOBALS['post']->ID, 'sb_room_pictures', true ) );
+			foreach( $metas as $meta ) {
+				$img_url = get_permalink( $meta->ID );
+				$pictures .= '<div class="room-pictures room-picture-'.$meta->ID.'"><a href="'.$img_url.'"><img src="'.$meta->url.'" title="'.$meta->title.'" /></a></div>';
+			}
+			$pictures .= '</div>';
+
+			return $content.$price.$amenities.$pictures;
 		}
 
 		// otherwise returns the database content
