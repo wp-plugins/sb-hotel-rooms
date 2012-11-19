@@ -3,7 +3,7 @@
 Plugin Name: SB Hotel - Rooms
 Plugin URI: http://www.sitebridge.net/
 Description: Sitebridge product of wordpress plugin (part of SB Hotel package)
-Version: 0.2.1
+Version: 0.2.1r1
 Author: Sitebridge Development Team
 
 
@@ -279,13 +279,15 @@ class sb_hotel_rooms {
 			$price		= '<div class="room-price"><label class="title">'.__( 'Price: ', 'rooms' ).'</label><span class="content">'.$metas['Price'].'</span></div>';
 			$amenities	= '<div class="room-ammenities"><label class="title">'.__( 'Amenities: ', 'rooms' ).'</label><span class="content">'.$metas['Amenities'].'</span></div>';
 
-			$pictures = '<div class="room-picture-container">';
 			$metas = json_decode( get_post_meta( $GLOBALS['post']->ID, 'sb_room_pictures', true ) );
-			foreach( $metas as $meta ) {
-				$img_url = get_permalink( $meta->ID );
-				$pictures .= '<div class="room-pictures room-picture-'.$meta->ID.'"><a href="'.$img_url.'"><img src="'.$meta->url.'" title="'.$meta->title.'" /></a></div>';
+			if( is_array($metas) ) {
+				$pictures = '<div class="room-picture-container">';
+				foreach( $metas as $meta ) {
+					$img_url = get_permalink( $meta->ID );
+					$pictures .= '<div class="room-pictures room-picture-'.$meta->ID.'"><a href="'.$img_url.'"><img src="'.$meta->url.'" title="'.$meta->title.'" /></a></div>';
+				}
+				$pictures .= '</div>';
 			}
-			$pictures .= '</div>';
 
 			return $content.$price.$amenities.$pictures;
 		}
