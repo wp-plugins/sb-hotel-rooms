@@ -21,6 +21,8 @@
 }
 </style>
 <script>
+var orig_send_to_editor = window.send_to_editor;
+
 jQuery(document).ready(function($) {
 	var metaValue = '<?php echo $metas[0]; ?>';
 	var roomPictures = [];
@@ -41,34 +43,39 @@ jQuery(document).ready(function($) {
 	}
 
 	$( '#add-image' ).live( 'click', function() {
-		formfield = $('#upload_image').attr('name');
+		formfield = $('#room_upload_image').attr('name');
 		tb_show('', '../wp-admin/media-upload.php?type=image&amp;TB_iframe=true');
+
+		window.send_to_editor = function( html ) {
+			console.log( 'rooms' );
+			var classes = jQuery('img',html).attr('class').split( ' ' );
+			var imgID;
+			$.each( classes,
+				function( key, val ) {
+					if( val.search( 'wp-image-' ) >= 0 ) {
+						imgID = +val.replace( 'wp-image-', '' );
+					}
+				}
+			);
+
+		    imgUrl = jQuery('img',html).attr('src');
+		    imgTitle = jQuery('img',html).attr('title');
+		    imgSrc = '<img class="room-pictures" src="' + imgUrl + '" hspace="2" />';
+		    imgDiv  = '<div class="room-pictures-container"><span class="close"><a>[x]</a></span><br />';
+		    imgDiv += imgSrc+'<br />';
+		    imgDiv += '<span class="caption">'+imgTitle+'</span></div>';
+		    roomPictures.push({ 'url': imgUrl, 'title': imgTitle, 'ID': imgID });
+			$('#room-pictures').val( JSON.stringify( roomPictures ) );
+		    $('#holder-image').append( imgDiv );
+		    tb_remove();
+		    i++;
+
+		    window.send_to_editor = orig_send_to_editor;
+
+		}
+
 		return false;
 	});
-
-	window.send_to_editor = function( html ) {
-		var classes = jQuery('img',html).attr('class').split( ' ' );
-		var imgID;
-		$.each( classes,
-			function( key, val ) {
-				if( val.search( 'wp-image-' ) >= 0 ) {
-					imgID = +val.replace( 'wp-image-', '' );
-				}
-			}
-		);
-
-	    imgUrl = jQuery('img',html).attr('src');
-	    imgTitle = jQuery('img',html).attr('title');
-	    imgSrc = '<img class="room-pictures" src="' + imgUrl + '" hspace="2" />';
-	    imgDiv  = '<div class="room-pictures-container"><span class="close"><a>[x]</a></span><br />';
-	    imgDiv += imgSrc+'<br />';
-	    imgDiv += '<span class="caption">'+imgTitle+'</span></div>';
-	    roomPictures.push({ 'url': imgUrl, 'title': imgTitle, 'ID': imgID });
-		$('#room-pictures').val( JSON.stringify( roomPictures ) );
-	    $('#holder-image').append( imgDiv );
-	    tb_remove();
-	    i++;
-	}
 
 	$('.room-pictures-container .close').live('click', function() {
 

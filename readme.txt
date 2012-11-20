@@ -1,6 +1,6 @@
 === SB Hotel Rooms ===
 Contributors: mrumengan
-Donate link: http://www.sitebridge.net/donate/
+Donate link: http://sitebridge.net/donate/
 Tags: hotel, room
 Requires at least: 3.3
 Tested up to: 3.4
@@ -30,6 +30,9 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 2. http://sitebridge.net/wp-content/uploads/2012/10/screenshot2.png
 
 == Changelog ==
+0.2r1.1r1
+- Fixed bug fail to add pictures to content instead added to room's pictures 
+
 0.2.1r1
 - Fixed bug in showing room's pictures, if none added shows error in front end
 

@@ -3,7 +3,7 @@
 Plugin Name: SB Hotel - Rooms
 Plugin URI: http://www.sitebridge.net/
 Description: Sitebridge product of wordpress plugin (part of SB Hotel package)
-Version: 0.2.1r1
+Version: 0.2.1r2
 Author: Sitebridge Development Team
 
 
