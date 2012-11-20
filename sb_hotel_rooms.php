@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: SB Hotel - Rooms
-Plugin URI: http://www.sitebridge.net/
+Plugin URI: http://sitebridge.net/
 Description: Sitebridge product of wordpress plugin (part of SB Hotel package)
-Version: 0.2.1r2
+Version: 0.2r1.1r1
 Author: Sitebridge Development Team
 
 
