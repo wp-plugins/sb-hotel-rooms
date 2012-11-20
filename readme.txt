@@ -17,8 +17,7 @@ It will only use your standard wordpress tables to store the rooms data.
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+1. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently asked questions ==
 
@@ -31,6 +30,9 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 2. http://sitebridge.net/wp-content/uploads/2012/10/screenshot2.png
 
 == Changelog ==
+0.2.1r1
+- Fixed bug in showing room's pictures, if none added shows error in front end
+
 0.2.1
 - Added room pictures management
 - Pictures showed in frontend as plain html, no css / style attached
