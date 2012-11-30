@@ -1,7 +1,7 @@
 === SB Hotel Rooms ===
 Contributors: mrumengan
 Donate link: http://sitebridge.net/donate/
-Tags: hotel, room
+Tags: hotel, rooms, hotel rooms
 Requires at least: 3.3
 Tested up to: 3.4
 Stable tag: 0.2.1r1
