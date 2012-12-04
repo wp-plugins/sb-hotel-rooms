@@ -4,7 +4,7 @@ Donate link: http://sitebridge.net/donate/
 Tags: hotel, rooms, hotel rooms
 Requires at least: 3.3
 Tested up to: 3.4
-Stable tag: 0.2.1r1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,17 @@ Yes you can, go to settings > rooms options and check the "With Room Types & Fac
 2. http://sitebridge.net/wp-content/uploads/2012/10/screenshot2.png
 
 == Changelog ==
+1.0.0
+- First full version release summary:
+	- Rooms custom post type
+	- Room detail & price
+	- Room Types*
+	- Room Pictures
+	- jQuery Lightbox for Room Pictures gallery*
+	- Plugin doesn't print out any stylesheet, except in jQuery Lightbox
+	
+* Can be swithced on/off from Settings > Room Options 
+
 0.2r1.1r1
 - Fixed bug fail to add pictures to content instead added to room's pictures 
 
