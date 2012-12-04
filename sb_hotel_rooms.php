@@ -308,6 +308,15 @@ class sb_hotel_rooms {
 			wp_register_script( 'cpt-rooms', plugin_dir_url(__FILE__).'js/room-list-standard.js' );
 			wp_enqueue_script( 'jq-lightbox' );
 			wp_enqueue_script( 'cpt-rooms' );
+
+			$lightbox_images = array(
+				'imageLoading'	=> plugin_dir_url(__FILE__) . '/images/lightbox-ico-loading.gif',
+				'imageBtnPrev'	=> plugin_dir_url(__FILE__) . '/images/lightbox-btn-prev.gif',
+				'imageBtnNext'	=> plugin_dir_url(__FILE__) . '/images/lightbox-btn-next.gif',
+				'imageBtnClose'	=> plugin_dir_url(__FILE__) . '/images/lightbox-btn-close.gif',
+				'imageBlank'	=> plugin_dir_url(__FILE__) . '/images/lightbox-blank.gif',
+			);
+			wp_localize_script( 'cpt-rooms', 'lightbox_images', $lightbox_images );
 		}
 	}
 }
