@@ -68,7 +68,11 @@ class sb_hotel_rooms {
 		add_action( 'admin_menu', array( &$this, 'register_sub_menu' ) );
 
 		add_filter( 'manage_rooms_posts_columns', array( &$this, 'change_room_columns' ) );
+
 		add_filter( 'the_content', array( &$this, 'rooms_filter_content' ) );
+
+		if( $this->my_options['jqlightbox'] )
+			add_action( 'wp_print_scripts', array( &$this, 'rooms_action_script_jqlightbox' ) );
 
 		add_action('wp_enqueue_scripts', array( &$this, 'enqueue_scripts' ) );
 
@@ -95,8 +99,6 @@ class sb_hotel_rooms {
 	}
 
 	function enqueue_scripts() {
-		wp_register_script( 'cpt-rooms', plugin_dir_url(__FILE__).'js/room-list-standard.js' );
-		wp_enqueue_script( 'cpt-rooms' );
 		wp_localize_script( 'cpt-rooms', 'cptRooms', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
@@ -256,7 +258,7 @@ class sb_hotel_rooms {
 		</tr>
 		<tr valign="top" class="even">
 			<th scope="row"><label for="blogname"><?php _e( 'Use jQuery Lightbox for Room\'s Pictures', 'sb_hotel_rooms' ); ?></label></th>
-			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][jqlightbox]" value="jqlightbox" <?php echo ( $options['jqlightbox'] ? 'checked' : '' ); ?> disabled ></td>
+			<td><input type="checkbox" id="sb_hotel_options_rooms_taxonomies" name="sb_hotel_options[rooms][jqlightbox]" value="jqlightbox" <?php echo ( $options['jqlightbox'] ? 'checked' : '' ); ?> ></td>
 		</tr>
 		</tbody>
 		</table>
@@ -284,7 +286,8 @@ class sb_hotel_rooms {
 				$pictures = '<div class="room-picture-container">';
 				foreach( $metas as $meta ) {
 					$img_url = get_permalink( $meta->ID );
-					$pictures .= '<div class="room-pictures room-picture-'.$meta->ID.'"><a href="'.$img_url.'"><img src="'.$meta->url.'" title="'.$meta->title.'" /></a></div>';
+					$img_attributes = wp_get_attachment_image_src( $meta->ID, 'full' );
+					$pictures .= '<div class="room-pictures room-picture-'.$meta->ID.'"><a href="'.$img_attributes[0].'"><img src="'.$meta->url.'" title="'.$meta->title.'" /></a></div>';
 				}
 				$pictures .= '</div>';
 			}
@@ -294,6 +297,18 @@ class sb_hotel_rooms {
 
 		// otherwise returns the database content
 		return $content;
+	}
+
+	function rooms_action_script_jqlightbox() {
+		if( $GLOBALS['post']->post_type == 'rooms' ) {
+			wp_register_style( 'jq-lightbox', plugin_dir_url( __FILE__ ).'css/jquery.lightbox-0.5.css');
+			wp_enqueue_style( 'jq-lightbox' );
+
+			wp_register_script( 'jq-lightbox', plugin_dir_url( __FILE__ ).'js/jquery-lightbox/jquery.lightbox-0.5.min.js', array( 'jquery' ) );
+			wp_register_script( 'cpt-rooms', plugin_dir_url(__FILE__).'js/room-list-standard.js' );
+			wp_enqueue_script( 'jq-lightbox' );
+			wp_enqueue_script( 'cpt-rooms' );
+		}
 	}
 }
 
